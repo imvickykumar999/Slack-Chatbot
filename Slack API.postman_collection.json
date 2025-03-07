@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "997e53b6-e820-4ba9-b7eb-286f5405d9b3",
+		"name": "Slack API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21359648"
+	},
+	"item": [
+		{
+			"name": "Send Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"channel\": \"D08GZD875B3\", // \"C08HBHXUKNU\",\n    \"message\": \"Hello from Postman!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://2c01-49-36-186-244.ngrok-free.app/send_message",
+					"protocol": "https",
+					"host": [
+						"2c01-49-36-186-244",
+						"ngrok-free",
+						"app"
+					],
+					"path": [
+						"send_message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>User</th>",
+							"        <th>Message</th>",
+							"    </tr>",
+							"    ",
+							"    {{#each response.messages}}",
+							"        <tr>",
+							"            <td>{{user}}</td>",
+							"            <td>{{text}}</td>",
+							"        </tr>",
+							"    {{/each}}",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return { response: pm.response.json() }",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://2c01-49-36-186-244.ngrok-free.app/fetch_messages?channel=D08GZD875B3",
+					"protocol": "https",
+					"host": [
+						"2c01-49-36-186-244",
+						"ngrok-free",
+						"app"
+					],
+					"path": [
+						"fetch_messages"
+					],
+					"query": [
+						{
+							"key": "channel",
+							"value": "D08GZD875B3",
+							"description": "C08HBHY3AL8 is not in channel"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Events Webhook",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://2c01-49-36-186-244.ngrok-free.app/slack/events",
+					"protocol": "https",
+					"host": [
+						"2c01-49-36-186-244",
+						"ngrok-free",
+						"app"
+					],
+					"path": [
+						"slack",
+						"events"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
